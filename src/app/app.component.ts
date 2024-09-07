@@ -1,12 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { MobileMenuComponent } from '@shared/components/mobile-menu/mobile-menu.component';
-import { TopBarComponent } from '@shared/components/top-bar/top-bar.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, TopBarComponent, MobileMenuComponent],
+  imports: [RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
