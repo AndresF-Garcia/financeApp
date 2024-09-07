@@ -9,4 +9,8 @@ export const routes: Routes = [
     path: 'cards',
     loadComponent: () => import('./pages/cards/cards.component')
   },
+  {
+    path: '**',
+    redirectTo: 'transactions'
+  }
 ];
