@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { MenuItem } from './interfaces/menu-item.interface';
 import { PrimeIcons } from 'primeng/api';
 import { RouterModule } from '@angular/router';
@@ -12,12 +12,12 @@ import { RouterModule } from '@angular/router';
 })
 export class MobileMenuComponent {
 
-  menuItems: MenuItem[] = [
+  public menuItems = signal<MenuItem[]>([
     {
       name: 'Home',
       icon: PrimeIcons.HOME,
       route: 'transactions'
     }
-  ]
+  ]);
 
 }
