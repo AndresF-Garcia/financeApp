@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'transactions',
+    title: 'Transacciones',
     loadComponent: () => import('./pages/transactions/transactions.component')
   },
   {

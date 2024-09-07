@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { MenuItem } from './interfaces/menu-item.interface';
+import { MenuItem } from '../../interfaces/menu-item.interface';
 import { PrimeIcons } from 'primeng/api';
 import { RouterModule } from '@angular/router';
 
