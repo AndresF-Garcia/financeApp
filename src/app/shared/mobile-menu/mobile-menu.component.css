@@ -1,0 +1,9 @@
+.bg-mobile-menu {
+  background-color: #fbfbfb;
+}
+
+.mobile-menu-item-selected {
+  position: relative;
+  bottom: 24px;
+  box-shadow: 0 0 6px -2px black;
+}

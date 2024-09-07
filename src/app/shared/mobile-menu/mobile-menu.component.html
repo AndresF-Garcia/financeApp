@@ -1,0 +1,11 @@
+<div class="absolute bottom-0 w-screen h-12 bg-mobile-menu flex justify-center items-center shadow-2xl shadow-black">
+
+  @for (menuItem of menuItems; track $index) {
+
+    <span class="p-2 flex items-center justify-center bg-mobile-menu rounded-full" [routerLink]="[menuItem.route]" routerLinkActive="mobile-menu-item-selected" >
+      <i class="text-xl" [class]="menuItem.icon"></i>
+    </span>
+
+  }
+
+</div>
