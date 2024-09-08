@@ -1,7 +1,8 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { MenuItem } from '../../interfaces/menu-item.interface';
 import { PrimeIcons } from 'primeng/api';
 import { RouterModule } from '@angular/router';
+import { RouteControlService } from '../../../services/route-control.service';
 
 @Component({
   selector: 'shared-mobile-menu',
@@ -12,6 +13,8 @@ import { RouterModule } from '@angular/router';
 })
 export class MobileMenuComponent {
 
+  private routerControlService = inject(RouteControlService);
+
   public menuItems = signal<MenuItem[]>([
     {
       name: 'Home',
@@ -19,5 +22,9 @@ export class MobileMenuComponent {
       route: 'transactions'
     }
   ]);
+
+  public changeRoute(title:string):void {
+    this.routerControlService.changeRouteHistory(title);
+  }
 
 }

@@ -1,6 +1,6 @@
-import { Component, inject } from '@angular/core';
-import { GeneralService } from '../../../services/general.service';
+import { Component, inject, effect } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { RouteControlService } from '../../../services/route-control.service';
 
 
 @Component({
@@ -12,11 +12,17 @@ import { RouterModule } from '@angular/router';
 })
 export class TopBarComponent {
 
-  private generalService = inject(GeneralService);
-  public title = this.generalService.pageTitle();
+  private routeControlService = inject(RouteControlService);
+  public title = this.routeControlService.currentRoute() ? this.routeControlService.currentRoute()?.title : '' ;
 
-  changeRouteTitle(title:string) {
-    this.generalService.updatePageTitle(title);
+  constructor() {
+    effect(() => {
+      this.title = this.routeControlService.currentRoute()?.title
+    })
+  }
+
+  changeRoute(title: string):void {
+    this.routeControlService.changeRouteHistory(title);
   }
 
 }
