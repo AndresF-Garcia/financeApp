@@ -17,8 +17,14 @@ export class MobileMenuComponent{
 
   public menuItems = signal<MenuItem[]>([
     {
-      name: 'Home',
+      name: 'Inicio',
       icon: PrimeIcons.HOME,
+      route: 'home',
+      title: 'Inicio'
+    },
+    {
+      name: 'Transacciones',
+      icon: PrimeIcons.BOOK,
       route: 'transactions',
       title: 'Transacciones'
     }

@@ -6,10 +6,15 @@ export const routes: Routes = [
     loadComponent: () => import('./layouts/general-layout/general-layout.component'),
     children: [
       {
+        path: 'home',
+        title: 'Inicio',
+        loadComponent: () => import('./pages/home/home.component'),
+      },
+      {
         path: 'transactions',
         title: 'Transacciones',
         loadComponent: () => import('./pages/transactions/transactions.component'),
-      }
+      },
     ]
   },
   {
@@ -25,6 +30,6 @@ export const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'transactions'
+    redirectTo: 'home'
   }
 ];
