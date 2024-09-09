@@ -14,11 +14,11 @@ export class RouteControlService {
 
   private router = inject(Router);
 
-  private _previousUrl = signal<string>('');
+  private _previousUrl = signal<string>('transactions');
   private _currentUrl = signal<string>('');
   private _currentPageTitle = signal<string>('');
 
-  public previousUrl = computed(() => this._previousUrl());
+  public previousUrl = computed(() => this._previousUrl() ? this._previousUrl() : 'transactions');
   public currentUrl = computed(() => this._currentUrl());
   public currentPageTitle = computed(() => this._currentPageTitle());
 
@@ -33,8 +33,6 @@ export class RouteControlService {
           this._previousUrl.set(value);
           return event.url
         });
-        console.log(this._previousUrl());
-        console.log(this._currentUrl());
       };
     });
   }
@@ -42,7 +40,5 @@ export class RouteControlService {
   public setPageTitle(title:string):void {
     this._currentPageTitle.set(title);
   }
-
-
 
 }

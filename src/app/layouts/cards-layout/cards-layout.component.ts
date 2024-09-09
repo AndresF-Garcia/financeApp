@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterModule } from '@angular/router';
+import { RouteControlService } from '../../services/route-control.service';
 
 @Component({
   standalone: true,
@@ -8,5 +9,13 @@ import { RouterModule } from '@angular/router';
   styles: ``
 })
 export default class CardsLayoutComponent {
+
+  private routeControlService = inject(RouteControlService);
+  private router = inject(Router);
+
+  public goToPreviousPage():void {
+    const previousRouteUrl = this.routeControlService.previousUrl();
+    this.router.navigate([previousRouteUrl]);
+  }
 
 }
