@@ -13,16 +13,14 @@ import { RouteControlService } from '../../../services/route-control.service';
 export class TopBarComponent {
 
   private routeControlService = inject(RouteControlService);
-  public title = this.routeControlService.currentRoute() ? this.routeControlService.currentRoute()?.title : '' ;
+
+  public title:string = this.routeControlService.currentPageTitle();
 
   constructor() {
     effect(() => {
-      this.title = this.routeControlService.currentRoute()?.title
-    })
+      this.title = this.routeControlService.currentPageTitle();
+    });
   }
 
-  changeRoute(title: string):void {
-    this.routeControlService.changeRouteHistory(title);
-  }
 
 }

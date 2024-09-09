@@ -11,7 +11,7 @@ import { RouteControlService } from '../../../services/route-control.service';
   styleUrl: './mobile-menu.component.css',
   templateUrl: './mobile-menu.component.html',
 })
-export class MobileMenuComponent {
+export class MobileMenuComponent{
 
   private routerControlService = inject(RouteControlService);
 
@@ -19,12 +19,10 @@ export class MobileMenuComponent {
     {
       name: 'Home',
       icon: PrimeIcons.HOME,
-      route: 'transactions'
+      route: 'transactions',
+      title: 'Transacciones'
     }
   ]);
 
-  public changeRoute(title:string):void {
-    this.routerControlService.changeRouteHistory(title);
-  }
 
 }

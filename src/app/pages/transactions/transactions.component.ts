@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { RouteControlService } from '../../services/route-control.service';
 
 @Component({
   standalone: true,
@@ -6,6 +7,12 @@ import { Component } from '@angular/core';
   templateUrl: './transactions.component.html',
   styleUrl: './transactions.component.css'
 })
-export default class TransactionsComponent {
+export default class TransactionsComponent{
+
+  private routeControlService = inject(RouteControlService);
+
+  constructor() {
+    this.routeControlService.setPageTitle('Transacciones')
+  }
 
 }

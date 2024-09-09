@@ -1,6 +1,7 @@
-import { computed, Injectable, signal } from '@angular/core';
-import { Route } from '@angular/router';
+import { computed, inject, Injectable, signal } from '@angular/core';
+import { NavigationEnd, Route, Router, Routes } from '@angular/router';
 import { routes } from '../app.routes';
+import { filter } from 'rxjs';
 
 /*
 Servicio para control de el estado de las rutas
@@ -11,40 +12,37 @@ Servicio para control de el estado de las rutas
 })
 export class RouteControlService {
 
-  private _currentRoute = signal<Route|null>(null);
-  private _previousRoute = signal<Route|null>(null);
+  private router = inject(Router);
 
-  public currentRoute = computed<Route|null>(() => this._currentRoute());
-  public previousRoute = computed<Route|null>(() => this._previousRoute());
+  private _previousUrl = signal<string>('');
+  private _currentUrl = signal<string>('');
+  private _currentPageTitle = signal<string>('');
+
+  public previousUrl = computed(() => this._previousUrl());
+  public currentUrl = computed(() => this._currentUrl());
+  public currentPageTitle = computed(() => this._currentPageTitle());
 
   constructor() {
-    this.changeRouteHistory('Transacciones');
+    this.setRouterListener();
   }
 
-  /**
-   * Actualiza el estado de las rutas
-   * @param newRouteTitle titulo de la nueva ruta a la que se navega
-   */
-  public changeRouteHistory(newRouteTitle:string):void {
-    this._previousRoute.set(this._currentRoute());
-    this._currentRoute.set(this.getRouteItemByTitle(newRouteTitle));
+  private setRouterListener():void {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this._currentUrl.update(value => {
+          this._previousUrl.set(value);
+          return event.url
+        });
+        console.log(this._previousUrl());
+        console.log(this._currentUrl());
+      };
+    });
   }
 
-  /**
-   * Busca una ruta por su titulo
-   * @param title titulo de la ruta a buscar en el Objeto routes (app.routes.ts)
-   * @returns item de el objeto routes
-   */
-  private getRouteItemByTitle(title:string): Route {
-
-    const allFoundRoutes = routes
-      .map( route => route.children ?? [] )
-      .flat()
-      .filter( route => !route.path?.includes(':') )
-      .filter( route => route.title === title);
-
-    return allFoundRoutes[0];
-
+  public setPageTitle(title:string):void {
+    this._currentPageTitle.set(title);
   }
+
+
 
 }
